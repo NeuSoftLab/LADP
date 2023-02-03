@@ -81,11 +81,11 @@ After our model is run, you can just run `DrawTool.py` to plot the user's predic
 Baseline model and Our model achieves the following results on 
 Kwai, MOOC, Baidu.
 
-![](.\Figure\Exp_result_1.png)
+![](./Figure/Exp_result_1.png)
 
-![](.\Figure\Exp_result_2.png)
+![](./Figure/Exp_result_2.png)
 
-![](.\Figure\Exp_result_3.png)
+![](./Figure/Exp_result_3.png)
 
     
     
