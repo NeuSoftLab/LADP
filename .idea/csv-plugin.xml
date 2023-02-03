@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\KDD\feature\day_1_activity_feature.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\KDD\feature\day_26_activity_feature.csv">
           <value>
             <Attribute>
