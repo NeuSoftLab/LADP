@@ -1,0 +1,9 @@
+{
+  "model_name": "DPCNN",
+  "dpcnn_conv2_kernel_1": 3,
+  "dpcnn_conv2_output_size_1": 32,
+  "dpcnn_conv2_kernel_2": 3,
+  "dpcnn_conv2_output_size_2": 64,
+  "liner_1_output_size": 128,
+  "dropout_p": 0.1
+}

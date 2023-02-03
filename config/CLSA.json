@@ -1,0 +1,9 @@
+{
+  "model_name": "CLSA",
+  "clas_conv2_kernel": 3,
+  "clsa_conv2_output_size": 7,
+  "clas_pool_kernel": 2,
+  "lstm_input_size": 100,
+  "hidden_size": 14,
+  "attention_input_size": 28
+}

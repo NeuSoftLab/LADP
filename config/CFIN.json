@@ -1,0 +1,14 @@
+{
+    "model_name": "CFIN",
+    "conv_size": 256,
+    "context_size": 32,
+    "embedding_size": 64,
+    "deep_layers": [100, 50],
+    "attn_enable": 1,
+    "attn_size": 128,
+    "kernel_size": 5,
+    "stride": 5,
+    "batch_norm": 1,
+    "batch_norm_decay": 0.095,
+    "dropout_p":0.1
+}

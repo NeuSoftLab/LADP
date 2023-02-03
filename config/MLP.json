@@ -1,0 +1,8 @@
+{
+    "model_name": "MLP",
+    "embedding_size": 64, 
+    "batch_norm": 1,
+    "batch_norm_decay": 0.095,
+    "deep_layers": [100, 50],
+    "dropout_p":0.1
+}

@@ -1,0 +1,32 @@
+{
+    "model_name": "MLTADP",
+    "period_num":2,
+    "week_embedding_size":30,
+    "day_embedding_size":30,
+    "week_num":7,
+    "day_num": 31,
+    "time_interval_embedding_size":30,
+    "u_embedding_size":64,
+    "embedding_size":64,
+    "hidden_size": 20,
+    "hidden_period_size":20,
+    "num_attention_head": 1,
+
+    "batch_norm_decay": 0.095,
+    "dimension_1": 60,
+    "deep_layers": [100, 50],
+    "context_size": 32,
+    "dropout_p":0.1,
+
+    "multi_task_enable":1,
+
+    "imbalance_stratage_enable":1,
+    "imbalance_stratage":{
+        "label_smooth_kernel":"gaussian",
+        "label_smooth_size":3,
+        "label_smooth_sigma":2,
+        "feature_smooth_kernel":"gaussian",
+        "feature_smooth_size":15,
+        "feature_smooth_sigma":5
+    }
+}

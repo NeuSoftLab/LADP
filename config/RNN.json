@@ -1,0 +1,5 @@
+{
+    "model_name":"RNN",
+    "input_size":64,
+    "hidden_size":64
+}

@@ -1,0 +1,10 @@
+{
+    "model_name":"LSCNN",
+    "embedding_size":64,
+    "hidden_size": 8,
+    "lstm_2_input_size":100,
+    "lscnn_conv2_kernel":3,
+    "lscnn_conv2_outputsize":20,
+    "lscnn_pool_kernel":2,
+    "dropout_p":0.1
+}
