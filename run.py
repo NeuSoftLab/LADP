@@ -21,9 +21,7 @@ def calEvalResult(loss_value, y_preds, y_trues, test_type, write_file=None,isMas
     y_trues_bool = np.copy(y_trues)
     y_trues_bool[y_trues >= eps] = 1.0
     y_trues_bool[y_trues < eps] = 0.0
-    # auc
-    #auc = metrics.roc_auc_score(y_trues_bool, y_preds)
-    auc = 0
+
     # rmse
     error = y_trues - y_preds
     rmse = (error ** 2).mean() ** 0.5
@@ -31,29 +29,20 @@ def calEvalResult(loss_value, y_preds, y_trues, test_type, write_file=None,isMas
     MAE = np.absolute(error).mean()
     # df
     df = abs(y_trues.mean() - y_preds.mean()) / y_trues.mean()
-    print_str = '%20s loss %3.6f  auc  %.4f MAE  %.4f rmse  %.4f  df(ActivateDay.Avg) %.4f' % (
-        test_type, loss_value, auc, MAE,rmse, df)
+    print_str = '%20s loss %3.6f  MAE  %.4f rmse  %.4f  df(ActivateDay.Avg) %.4f' % (
+        test_type, loss_value, MAE,rmse, df)
+
     if not isMask:
         print(print_str)
         if (write_file != None):
             write_file.write(print_str + "\n")
-    return auc, rmse, df ,MAE
+    return rmse, df ,MAE
 
 def calEvalResult_FLTADP(loss_value, predict_results, test_type, write_file=None,isMask=False):
     # y_preds_1, y_trues_1 whether active every day (category) : [data_num, label_num]
     # y_preds_2, y_trues_2 active days percentage (category) : [data_num,] \in [0,1]
-    y_preds_1, y_trues_1, y_preds_2, y_trues_2 = predict_results
-    if isMask: y_trues_1 = np.max(y_trues_1,2)
-    # y_preds_1 = np.max(y_preds_1,2)
-    #y_auc_daylevel_activate = metrics.roc_auc_score(y_trues_1.reshape(-1), y_preds_1.reshape(-1))
-    y_auc_daylevel_activate = 0
-    if isMask:
-        y_trues_2=np.append(y_trues_2,0)
-        y_preds_2=np.append(y_preds_2,0)
-        y_trues_2 = np.append(y_trues_2, 1)
-        y_preds_2 = np.append(y_preds_2, 1)
-    # y_auc_01_activate = metrics.roc_auc_score(y_trues_2 > 1e-5, y_preds_2)
-    y_auc_01_activate = 0
+    y_preds_1, y_trues_1, y_preds_2, y_trues_2 = predict_results 
+
     # rmse
     error = (y_trues_2 - y_preds_2)
     rmse = (error ** 2).mean() ** 0.5
@@ -61,13 +50,13 @@ def calEvalResult_FLTADP(loss_value, predict_results, test_type, write_file=None
     MAE = np.absolute(error).mean()
     # df: average number of active days in the future
     df = abs(y_preds_2.mean() - y_trues_2.mean()) / y_trues_2.mean()
-    print_str = '%20s loss %6.6f auc_day_activate %.4f auc_01_activate %.4f  MAE  %.4f  rmse  %.4f  df(ActivateDay.Avg) %.4f' % (
-        test_type, loss_value, y_auc_daylevel_activate, y_auc_01_activate, MAE,rmse, df)
+    print_str = '%20s loss %6.6f MAE  %.4f  rmse  %.4f  df(ActivateDay.Avg) %.4f' % (
+        test_type, loss_value, MAE, rmse, df)
     if not isMask:
         print(print_str)
         if (write_file != None):
             write_file.write(print_str + "\n")
-    return y_auc_01_activate, rmse, df, MAE
+    return rmse, df, MAE
 
 
 def run(epoch, datas, model, optimizer, device, model_name="None", run_type="train", lossFun='BCE', write_file=None,model_param=None,fileName=None):
@@ -129,7 +118,8 @@ def run(epoch, datas, model, optimizer, device, model_name="None", run_type="tra
             day = model_param['day']
             future_day = model_param['future_day']
             batch_size = model_param['batch_size']
-            y_1 = y_1.reshape(batch_size, day+future_day, -1)
+            y_1 = y_1.reshape(batch_size, day + future_day, -1)
+            y_1 = y_1[:,day:,:]
             y_1_input = y_1.clone()
             one = torch.ones_like(y_1_input)
             zero = torch.zeros_like(y_1_input)

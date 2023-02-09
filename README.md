@@ -19,8 +19,25 @@ This paper introduces a new task, user long-term active days prediction, in whic
     chmod 777 create_envs.sh
     ./create_envs.sh
 
-# 3. Running
-# 3.1 Datasets Selection
+# 3. Baselines and MLADP
+We employ two classic machine learning models (LR, MLP), three dropout prediction models (CFIN, CLSA, DPCNN), and two user activity prediction models (LSCNN, M2MRNN) for evaluation. 
+
+## Class Machine Learning Models
+*  Linear Regression (LR) is a commonly used supervised learning algorithm in statistics and machine learning. 
+* Multi-layer Perceptron (MLP) is a widely used feed-forward neural network, often used to solve classification and regression problems.
+
+## Dropout Prediction Models
+* CFIN：[Understanding Dropouts in MOOCs](http://lfs.aminer.cn/misc/moocdata/publications/AAAI19-Feng-dropout-moocs.pdf)
+* CLSA：[CLSA: A novel deep learning model for MOOC dropout prediction](https://www.sciencedirect.com/science/article/abs/pii/S0045790621002901?fr=RR-9&ref=pdf_download&rr=788339e7e82f04f8)
+* DPCNN：[Student dropout prediction in massive open online courses by convolutional neural networks](https://link.springer.com/content/pdf/10.1007/s00500-018-3581-3.pdf?pdf=button)
+## Active user 
+* LSCNN：https://github.com/chantcalf/2018-Rank4-  选择NN1模型
+* M2MRNN：https://github.com/drop-out/RNN-Active-User-Forecast
+
+The above 7 baselines codes are in the `Model` folder.
+
+# 4. Running
+# 4.1 Datasets Selection
 Select a dataset you want to include.
 There are two kinds of dataset
 ### Statistics of the datasets
@@ -30,6 +47,7 @@ There are two kinds of dataset
 |  #Behavior  |     6    |     7    |
 |     #Day    |    30    |    30    |
 
+We excluded users who were inactive for a short-term, because the number of inactive users greatly exceeds the number of active users in the short term. Predicting the long-term active days for inactive users primarily relies on user portrait information, and dataset with lots of inactive users impedes a effective evaluation of the model's ability to predict long-term active days based on short-term behavior. The number of users with different $D_f$ in each dataset as follows.
 ### The number of users with different 𝐷𝑝
 | **Dataset** | **Kwai** | **MOOC** |
 |-------------|----------|----------|
@@ -38,44 +56,46 @@ There are two kinds of dataset
 |    𝐷𝑝 = 7   |   8,322  | 66,448   |
 |    𝐷𝑝 = 14  |  17,857  | 93,825   |
 
+`data/<dataset>/log/day_<day>_activity_log.csv`
+
+Each data set represents the user's activity record of the day in a row.
+
+The record contains the user ID, the number of activities of each behavior and the user portrait.
+
 `data/<dataset>/feature/day_<day>_activity_feature.csv`
 
-
-Each data set represents the student's activity record of the day in a row.
+Each data set represents the user's activity record of the day in a row.
 
 The record contains the user ID, the normalized result after the statistics of the number of activities of each behavior and the user portrait.
 
-
-
 `data/<dataset>/info/user_info.csv`
 
-Statistics of each student's daily activities in a certain course.
-
-
+Statistics of each user's daily activities in a certain course.
 
 `data/<dataset>/info/user_time_info.csv`
 
+The specific day corresponding to each user in the statistical interval.
 
-The specific day corresponding to each student in the statistical interval
-
-# 3.2 Training 
+# 4.2 Training 
 We use MOOC as an example of a dataset.
 
-If you want to run the CFIN model to predict the user's activity for 23 days in 7 days
+If you want to run the MLADP model to predict the user's activity for 23 days in 7 days
     
-    python main.py --model_name 'CFIN' --DataSet 'KDD'  --day 7 --future_day 23
+    python main.py --model_name 'MLADP' --DataSet 'KDD'  --day 7 --future_day 23
     
 If you want to change the random seed of data partition
 
-    python main.py --model_name 'CFIN' --DataSet 'KDD'  --day 7 --future_day 23 --seed 2
+    python main.py --model_name 'MLADP' --DataSet 'KDD'  --day 7 --future_day 23 --seed 2
 
+The model_name can choose from MLADP, CFIN, CLSA, DPCNN, LR, LSCNN, MLP and RNN (e.g., M2MRNN).
 
-# 3.3 Visualization
+The hyperparameters of each model can be set by modifying the corresponding configuration file `<model_name>.json` under the `config` folder
 
-After our model is run, you can just run `DrawTool.py` to plot the user's predicted activity and real situation in the next N days.
+# 4.3 Visualization
+After our model is run, you can just run `python DrawTool.py` to plot the user's predicted activity and real situation in the next N days.
 
-# 4. Results
-# 4.1 Experiment Results
+# 5. Results
+# 5.2 Experiment Results
 Baseline model and Our model achieves the following results on 
 Kwai, MOOC, Baidu.
 
@@ -85,5 +105,6 @@ Kwai, MOOC, Baidu.
 
 ![](./Figure/Exp_result_3.png)
 
-    
+In addition, we have published the detailed experiment log in the `Log` folder, and the experimental results in the paper can also be obtained by executing `python statistics_result.py`. 
+
     

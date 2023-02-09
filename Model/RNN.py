@@ -25,7 +25,7 @@ class RNN(torch.nn.Module):
 
         # batch_size = 32, seq_length = day, input_size = action_type_num, hidden_size = 64
         self.batch_size = model_param['batch_size']
-        self.seq_length = model_param['seq_length']
+        self.seq_length = model_param['day']
         self.input_size = model_param['input_size']
         self.hidden_size = model_param['hidden_size']
 

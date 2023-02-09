@@ -19,8 +19,9 @@
     "dropout_p":0.1,
 
     "multi_task_enable":1,
+    "fine_grained":1,
 
-    "imbalance_stratage_enable":1,
+    "imbalance_stratage_enable":0,
     "imbalance_stratage":{
         "label_smooth_kernel":"gaussian",
         "label_smooth_size":3,
