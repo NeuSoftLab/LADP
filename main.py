@@ -59,8 +59,6 @@ def main():
     parser.add_argument('--bce_weight', type=float, default=1)
     # temporary hyperparameters
     parser.add_argument('--multi_task_enable', type=int, default=1)
-    parser.add_argument('--imbalance_stratage_enable', type=int, default=0)
-    parser.add_argument('--fine_grained', type=int, default=1)
     params = parser.parse_args()
 
     # pre_process
@@ -138,7 +136,6 @@ def main():
                                               write_file=f,model_param=model_param,fileName=fileName)
         if (params.LossFun == 'BCE' and valid_auc > best_valid_auc) or (
                 params.LossFun == 'MSE' and valid_rmse < best_valid_rmse):
-        #if valid_df < best_valid_df:
             model.eval()
             best_valid_auc, best_valid_MAE,best_valid_rmse, best_valid_df, best_epoch = valid_auc, valid_MAE,valid_rmse, valid_df, i
             test_auc, test_rmse, test_df,test_MAE = run(-1, test_set, model, optimizer, device, model_name, run_type="test",

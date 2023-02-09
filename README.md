@@ -36,16 +36,14 @@ There are two kinds of dataset
 |    𝐷𝑝 = 3   |   3,029  | 41,747   |
 |    𝐷𝑝 = 5   |   5,172  | 55,059   |
 |    𝐷𝑝 = 7   |   8,322  | 66,448   |
-|   𝐷𝑝 = 14   |  17,857  | 93,825   |
+|    𝐷𝑝 = 14  |  17,857  | 93,825   |
 
 `data/<dataset>/feature/day_<day>_activity_feature.csv`
 
 
 Each data set represents the student's activity record of the day in a row.
 
-The record contains the user ID, 
-the normalized result after the statistics of the number of activities of 
-each behavior and the user portrait.
+The record contains the user ID, the normalized result after the statistics of the number of activities of each behavior and the user portrait.
 
 
 
