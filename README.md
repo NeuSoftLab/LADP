@@ -37,9 +37,8 @@ We employ two classic machine learning models (LR, MLP), three dropout predictio
 The above 7 baselines codes are in the `Model` folder.
 
 # 4. Running
-# 4.1 Datasets Selection
-Select a dataset you want to include.
-There are two kinds of dataset
+## 4.1 Datasets Selection
+Select a dataset you want to include. There are two kinds of dataset
 ### Statistics of the datasets
 | **Dataset** | **Kwai** | **MOOC** |
 |:-----------:|:--------:|:--------:|
@@ -47,8 +46,8 @@ There are two kinds of dataset
 |  #Behavior  |     6    |     7    |
 |     #Day    |    30    |    30    |
 
-We excluded users who were inactive for a short-term, because the number of inactive users greatly exceeds the number of active users in the short term. Predicting the long-term active days for inactive users primarily relies on user portrait information, and dataset with lots of inactive users impedes a effective evaluation of the model's ability to predict long-term active days based on short-term behavior. The number of users with different $D_f$ in each dataset as follows.
 ### The number of users with different 𝐷𝑝
+We excluded users who were inactive for a short-term, because the number of inactive users greatly exceeds the number of active users in the short term. Predicting the long-term active days for inactive users primarily relies on user portrait information, and dataset with lots of inactive users impedes a effective evaluation of the model's ability to predict long-term active days based on short-term behavior. The number of users with different $D_f$ in each dataset as follows.
 | **Dataset** | **Kwai** | **MOOC** |
 |-------------|----------|----------|
 |    𝐷𝑝 = 3   |   3,029  | 41,747   |
@@ -56,6 +55,7 @@ We excluded users who were inactive for a short-term, because the number of inac
 |    𝐷𝑝 = 7   |   8,322  | 66,448   |
 |    𝐷𝑝 = 14  |  17,857  | 93,825   |
 
+### The format of datasets. 
 `data/<dataset>/log/day_<day>_activity_log.csv`
 
 Each data set represents the user's activity record of the day in a row.
@@ -92,12 +92,12 @@ The model_name can choose from MLADP, CFIN, CLSA, DPCNN, LR, LSCNN, MLP and RNN 
 The hyperparameters of each model can be set by modifying the corresponding configuration file `<model_name>.json` under the `config` folder
 
 # 4.3 Visualization
-After our model is run, you can just run `python DrawTool.py` to plot the user's predicted activity and real situation in the next N days.
+After our model is run, you can just run `python DrawTool.py` to plot the user's predicted activity and real situation in the next N days which predicted by the behavior periodic prediction module in MLADP.
 
 # 5. Results
 # 5.2 Experiment Results
 Baseline model and Our model achieves the following results on 
-Kwai, MOOC, Baidu.
+Kwai, MOOC, Baidu datasets.
 
 ![](./Figure/Exp_result_1.png)
 
