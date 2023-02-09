@@ -19,7 +19,7 @@ This paper introduces a new task, user long-term active days prediction, in whic
     chmod 777 create_envs.sh
     ./create_envs.sh
 
-# 3. Baselines and MLADP
+# 3. Baselines
 We employ two classic machine learning models (LR, MLP), three dropout prediction models (CFIN, CLSA, DPCNN), and two user activity prediction models (LSCNN, M2MRNN) for evaluation. 
 
 ## Class Machine Learning Models
